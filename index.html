@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>It's Her Turn – Take Action</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #ffffff;
+      color: #222;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    select {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      background: white;
+    }
+
+    #status {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    #contactBox {
+      display: none;
+      margin-top: 30px;
+      padding: 25px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fafafa;
+    }
+
+    #ministerName {
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+
+    #officialTitle {
+      margin-top: 0;
+      line-height: 1.5;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 330px;
+      margin-top: 10px;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      resize: vertical;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 4px;
+      background: #1f6f8b;
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .secondary {
+      background: #555;
+      margin-right: 8px;
+    }
+
+    .instructions {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f1f1f1;
+      line-height: 1.5;
+    }
+
+    .error {
+      color: #b00020;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #666;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Take Action</h1>
+
+  <p class="intro">
+    Select your country of citizenship to find the relevant government contact
+    and send a ready-to-use message asking your government to support a woman
+    as the next UN Secretary-General.
+  </p>
+
+  <label for="countrySelect">Your country of citizenship</label>
+
+  <select id="countrySelect" disabled>
+    <option value="">Loading countries...</option>
+  </select>
+
+  <div id="status"></div>
+
+  <div id="contactBox">
+
+    <h2 id="ministerName"></h2>
+    <p id="officialTitle"></p>
+
+    <h3>Your message</h3>
+
+    <p>
+      Review and personalize the message before sending it.
+    </p>
+
+    <textarea id="message"></textarea>
+
+    <div id="actionArea"></div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const CSV_URL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQRTIoWCXAsYBKIQe4EkZLirMFG23DgnBHWBK06XBFeBq398SslI-ww1ptgGzcTVBaTypl_9zDei0uD/pub?gid=566962361&single=true&output=csv";
+
+let contacts = [];
+
+
+/* -------------------------------
+   LOAD GOOGLE SHEET
+-------------------------------- */
+
+async function loadContacts() {
+
+  const status = document.getElementById("status");
+
+  try {
+
+    const response = await fetch(CSV_URL);
+
+    if (!response.ok) {
+      throw new Error("Could not load directory.");
+    }
+
+    const csvText = await response.text();
+
+    contacts = parseCSV(csvText);
+
+    populateCountries();
+
+    status.textContent = "";
+
+  } catch (error) {
+
+    console.error(error);
+
+    status.innerHTML =
+      '<p class="error">We could not load the government directory. Please try again shortly.</p>';
+
+  }
+}
+
+
+/* -------------------------------
+   CSV PARSER
+-------------------------------- */
+
+function parseCSV(text) {
+
+  const rows = [];
+  let row = [];
+  let field = "";
+  let insideQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+
+    const char = text[i];
+    const next = text[i + 1];
+
+    if (char === '"' && insideQuotes && next === '"') {
+      field += '"';
+      i++;
+    }
+
+    else if (char === '"') {
+      insideQuotes = !insideQuotes;
+    }
+
+    else if (char === "," && !insideQuotes) {
+      row.push(field);
+      field = "";
+    }
+
+    else if ((char === "\n" || char === "\r") && !insideQuotes) {
+
+      if (char === "\r" && next === "\n") {
+        i++;
+      }
+
+      row.push(field);
+
+      if (row.some(cell => cell.trim() !== "")) {
+        rows.push(row);
+      }
+
+      row = [];
+      field = "";
+    }
+
+    else {
+      field += char;
+    }
+  }
+
+  if (field.length || row.length) {
+    row.push(field);
+
+    if (row.some(cell => cell.trim() !== "")) {
+      rows.push(row);
+    }
+  }
+
+  if (rows.length < 2) {
+    return [];
+  }
+
+  const headers = rows[0].map(h => h.trim());
+
+  return rows.slice(1).map(row => {
+
+    const item = {};
+
+    headers.forEach((header, index) => {
+      item[header] = (row[index] || "").trim();
+    });
+
+    return item;
+
+  });
+}
+
+
+/* -------------------------------
+   COUNTRY DROPDOWN
+-------------------------------- */
+
+function populateCountries() {
+
+  const select = document.getElementById("countrySelect");
+
+  select.innerHTML =
+    '<option value="">Select your country</option>';
+
+  contacts
+    .filter(contact => contact["Country"])
+    .sort((a, b) =>
+      a["Country"].localeCompare(b["Country"])
+    )
+    .forEach(contact => {
+
+      const option = document.createElement("option");
+
+      option.value = contact["Country"];
+      option.textContent = contact["Country"];
+
+      select.appendChild(option);
+
+    });
+
+  select.disabled = false;
+}
+
+
+/* -------------------------------
+   COUNTRY SELECTED
+-------------------------------- */
+
+document
+  .getElementById("countrySelect")
+  .addEventListener("change", function () {
+
+    const country = this.value;
+
+    if (!country) {
+
+      document.getElementById("contactBox").style.display = "none";
+      return;
+
+    }
+
+    const contact =
+      contacts.find(item => item["Country"] === country);
+
+    if (!contact) {
+      return;
+    }
+
+    showContact(contact);
+
+  });
+
+
+/* -------------------------------
+   SHOW GOVERNMENT CONTACT
+-------------------------------- */
+
+function showContact(contact) {
+
+  const box = document.getElementById("contactBox");
+
+  document.getElementById("ministerName").textContent =
+    contact["Minister Name"] || "Foreign Ministry";
+
+  document.getElementById("officialTitle").textContent =
+    contact["Official Title"] || "";
+
+  const salutation =
+    contact["Salutation"] || "Dear Minister";
+
+  const message =
+`${salutation},
+
+I am writing as a young person from ${contact["Country"]} to urge our government to publicly commit to supporting a woman as the next Secretary-General of the United Nations.
+
+[THE FINAL CAMPAIGN LETTER WILL GO HERE]
+
+Sincerely,
+
+[Your Name]`;
+
+  document.getElementById("message").value = message;
+
+  buildActionButtons(contact);
+
+  box.style.display = "block";
+}
+
+
+/* -------------------------------
+   EMAIL / CONTACT FORM BUTTONS
+-------------------------------- */
+
+function buildActionButtons(contact) {
+
+  const area = document.getElementById("actionArea");
+
+  area.innerHTML = "";
+
+  const type =
+    (contact["Contact Type"] || "").toLowerCase();
+
+  const email =
+    contact["Email"] || "";
+
+  const formUrl =
+    contact["Contact Form URL"] || "";
+
+
+
+  /* EMAIL */
+
+  if (type === "email" && email) {
+
+    const button = document.createElement("button");
+
+    button.className = "button";
+    button.textContent = "EMAIL MY GOVERNMENT";
+
+    button.onclick = function () {
+
+      const subject =
+        "Support a Woman as the Next UN Secretary-General";
+
+      const body =
+        document.getElementById("message").value;
+
+      const mailto =
+        "mailto:" +
+        email +
+        "?subject=" +
+        encodeURIComponent(subject) +
+        "&body=" +
+        encodeURIComponent(body);
+
+      window.location.href = mailto;
+
+    };
+
+    area.appendChild(button);
+
+    const note = document.createElement("p");
+
+    note.className = "small";
+    note.textContent =
+      "Your email application will open with the government address, subject and message already filled in.";
+
+    area.appendChild(note);
+
+  }
+
+
+
+  /* CONTACT FORM */
+
+  else if (type === "form" && formUrl) {
+
+    const instructions =
+      document.createElement("div");
+
+    instructions.className = "instructions";
+
+    instructions.innerHTML =
+      "<strong>Your government uses an online contact form.</strong><br><br>" +
+      "Copy your message, then open the official government contact form and paste it there.";
+
+    area.appendChild(instructions);
+
+
+    const copyButton =
+      document.createElement("button");
+
+    copyButton.className =
+      "button secondary";
+
+    copyButton.textContent =
+      "COPY MESSAGE";
+
+    copyButton.onclick =
+      async function () {
+
+        const text =
+          document.getElementById("message").value;
+
+        try {
+
+          await navigator.clipboard.writeText(text);
+
+          copyButton.textContent =
+            "MESSAGE COPIED ✓";
+
+        } catch (error) {
+
+          document
+            .getElementById("message")
+            .select();
+
+          document.execCommand("copy");
+
+          copyButton.textContent =
+            "MESSAGE COPIED ✓";
+
+        }
+
+      };
+
+    area.appendChild(copyButton);
+
+
+    const formButton =
+      document.createElement("a");
+
+    formButton.className = "button";
+
+    formButton.textContent =
+      "OPEN GOVERNMENT CONTACT FORM";
+
+    formButton.href = formUrl;
+
+    formButton.target = "_blank";
+
+    formButton.rel = "noopener noreferrer";
+
+    area.appendChild(formButton);
+
+  }
+
+
+
+  /* NO CONTACT AVAILABLE */
+
+  else {
+
+    const warning =
+      document.createElement("div");
+
+    warning.className =
+      "instructions";
+
+    warning.innerHTML =
+      "<strong>Contact information is currently being verified.</strong><br>" +
+      "Please check back soon.";
+
+    area.appendChild(warning);
+
+  }
+
+}
+
+
+/* START */
+
+loadContacts();
+
+</script>
+
+</body>
+</html>
