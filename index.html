@@ -531,10 +531,13 @@
         Your message
       </h3>
 
-      <p class="message-note">
-  <strong>Before sending:</strong> Please review the message and scroll to the bottom to add your <strong>full name and city/country</strong>. You may also add your <strong>university or organization and email address (optional)</strong>. You can personalize any part of the message if you wish.
+<p class="message-note">
+  <strong style="color:#F61E5B;">Before sending:</strong> Please review the message and scroll to the bottom to add your <strong style="color:#F61E5B;">full name and city/country</strong>. You may also add your <strong style="color:#F61E5B;">university or organization and email address (optional)</strong>. You can personalize any part of the message if you wish.
 </p>
-
+<p id="form-note" class="message-note" style="display:none; font-size:0.95em;">
+  <strong style="color:#F61E5B;">Using a government contact form?</strong>
+  If the form does not appear immediately, scroll down the page or look for <strong>“Contact Us,” “Contact,” or “Send a message.”</strong>
+</p>
       <textarea id="message"></textarea>
 
       <div id="actionArea"></div>
@@ -983,7 +986,9 @@ function buildActionButtons(
         "Contact Type"
       ] || ""
     ).toLowerCase();
-
+  
+const formNote = document.getElementById("form-note");
+formNote.style.display = type === "form" ? "block" : "none";
 
   const email =
     contact["Email"] || "";
