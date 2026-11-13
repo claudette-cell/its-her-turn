@@ -582,6 +582,254 @@ const CSV_URL =
 
 let contacts = [];
 
+const letterTemplates = {
+
+  English: (salutation, country) => `${salutation},
+
+I am writing as a young person from ${country} to urge our government to publicly commit to supporting a woman as the next Secretary-General of the United Nations.
+
+In the more than 80 years since the United Nations was founded, no woman has held this position. This exclusion is not simply a matter of symbolism. It raises a fundamental question about whether the world’s leading international institution is prepared to practice the equality it promotes.
+
+My generation and the wider public deserve international leadership that is courageous, capable, and accountable. We need a UN Secretary-General who will defend human rights, work for peace, listen meaningfully to young people, and uphold the principles of the UN Charter, even when doing so challenges powerful interests.
+
+Supporting a woman does not mean setting qualifications aside. It means recognizing that experience, integrity, diplomatic skills and leadership are not limited to men, and refusing to accept another selection process that leaves qualified women behind.
+
+Women have long demonstrated the experience, integrity, diplomatic skills, and leadership needed to serve at the highest levels of international affairs. It is time to end the longstanding exclusion of women from this position.
+
+I therefore ask our government to:
+
+1. Publicly commit to supporting a woman as the next UN Secretary-General.
+2. Encourage our Permanent Representative to the United Nations to advance this commitment in discussions with other Member States and throughout the appointment process.
+3. Commit to secure the appointment of a woman and work with other governments to secure her appointment.
+4. Support a transparent, merit-based process that enables meaningful public scrutiny of candidates, including their commitment to human rights, gender equality and youth participation.
+
+Our government should not treat this decision as a matter reserved for the most powerful states. It should use its diplomatic voice to help secure leadership that reflects both the principles of the United Nations and the people it serves.
+
+As a young person, I am living with the consequences of the decisions international leaders made yesterday and continue to make today. I want to see our government demonstrate that young people’s demands for equality and accountable leadership are taken seriously.
+
+I would highly appreciate a written response explaining whether our government will make these commitments and what concrete steps it will take to advance them.
+
+The next appointment is an opportunity to turn decades of promises of equality into action. I urge you to help ensure that this opportunity is not lost.
+
+Sincerely,
+
+[Full Name]
+[City, Country]
+[University/Organization, optional]
+[Email address, optional]`,
+
+
+  Spanish: (salutation, country) => `${salutation}:
+
+Escribo a usted como joven de ${country} para solicitar a nuestro gobierno que se comprometa públicamente a apoyar a una mujer como próxima Secretaria General de las Naciones Unidas.
+
+En los más de 80 años transcurridos desde la fundación de las Naciones Unidas, ninguna mujer ha ocupado este cargo. Esta exclusión no es simplemente una cuestión simbólica. Plantea una pregunta fundamental: ¿Está la principal organización internacional del mundo preparada para poner en práctica la igualdad que promueve?
+
+Mi generación y la sociedad en general merecen un liderazgo internacional valiente, competente y que rinda cuentas. Necesitamos una Secretaria General de las Naciones Unidas que defienda los derechos humanos, trabaje por la paz, escuche de manera significativa a las juventudes y defienda los principios de la Carta de las Naciones Unidas, incluso cuando hacerlo implique desafiar intereses poderosos.
+
+Apoyar a una mujer no significa dejar de lado las cualificaciones. Significa reconocer que la experiencia, la integridad, las habilidades diplomáticas y la capacidad de liderazgo no son atributos exclusivos de los hombres, y negarse a aceptar otro proceso de selección que deje atrás a mujeres altamente cualificadas.
+
+Las mujeres han demostrado desde hace mucho tiempo que tienen la experiencia, la integridad, las habilidades diplomáticas y el liderazgo necesarios para desempeñarse en los niveles más altos de las relaciones internacionales. Ha llegado el momento de poner fin a la histórica exclusión de las mujeres de este cargo.
+
+Por lo tanto, solicito que nuestro gobierno:
+
+1. Asuma públicamente el compromiso de apoyar a una mujer como próxima Secretaria General de las Naciones Unidas.
+2. Inste a nuestra Representación Permanente ante las Naciones Unidas a promover este compromiso en las discusiones con otros Estados Miembros y a lo largo de todo el proceso de nombramiento.
+3. Se comprometa a asegurar el nombramiento de una mujer y a trabajar con otros gobiernos para asegurar su nombramiento.
+4. Apoye un proceso transparente y basado en el mérito, que permita un escrutinio público significativo de las candidaturas, incluido el compromiso de las personas candidatas con los derechos humanos, la igualdad de género y la participación de las juventudes.
+
+Nuestro gobierno no debe tratar esta decisión como un asunto reservado a los Estados más poderosos. Debe hacer valer su voz diplomática para contribuir a la elección de un liderazgo que refleje tanto los principios de las Naciones Unidas como a las personas a las que sirve.
+
+Como joven, vivo con las consecuencias de las decisiones que los líderes internacionales tomaron ayer y que siguen tomando hoy. Quiero ver que nuestro gobierno demuestre que las demandas de los jóvenes en favor de la igualdad y de un liderazgo que rinda cuentas se toman en serio.
+
+Agradecería mucho recibir una respuesta por escrito en la que se aclare si nuestro gobierno asumirá estos compromisos y qué medidas concretas adoptará para llevarlos adelante.
+
+El próximo nombramiento representa una oportunidad para transformar décadas de promesas de igualdad en acciones concretas. Le insto a contribuir para garantizar que esta oportunidad no se desperdicie.
+
+Atentamente,
+
+[Nombre completo]
+[Ciudad, País]
+[Universidad/Organización, opcional]
+[Correo electrónico, opcional]`,
+
+
+  Portuguese: (salutation, country) => `${salutation},
+
+Escrevo como jovem de ${country} para solicitar que nosso governo assuma publicamente o compromisso de apoiar a escolha de uma mulher como próxima Secretária-Geral das Nações Unidas.
+
+Em mais de 80 anos desde a fundação das Nações Unidas, nenhuma mulher ocupou esse cargo. Essa exclusão não é apenas uma questão simbólica. Ela levanta uma pergunta fundamental: a principal organização internacional do mundo está preparada para colocar em prática a igualdade que promove?
+
+Minha geração e a sociedade em geral merecem uma liderança internacional corajosa, competente e comprometida com a prestação de contas. Precisamos de uma Secretária-Geral da ONU que defenda os direitos humanos, trabalhe pela paz, escute de forma significativa as vozes da juventude e respeite os princípios da Carta das Nações Unidas, mesmo quando isso significar contrariar interesses poderosos.
+
+Apoiar uma mulher não significa deixar as qualificações de lado. Significa reconhecer que experiência, integridade, habilidades diplomáticas e capacidade de liderança não são atributos exclusivos dos homens, e recusar-se a aceitar mais um processo de seleção que deixa para trás mulheres altamente qualificadas.
+
+Há muito tempo mulheres demonstram possuir a experiência, a integridade, as habilidades diplomáticas e a capacidade de liderança necessárias para ocupar os mais altos cargos das relações internacionais. Chegou a hora de pôr fim à histórica exclusão das mulheres dessa posição.
+
+Diante disso, solicito que nosso governo:
+
+1. Assuma publicamente o compromisso de apoiar uma mulher como próxima Secretária-Geral das Nações Unidas.
+2. Oriente nossa Representação Permanente junto às Nações Unidas a promover esse compromisso nas discussões com outros Estados-Membros e ao longo de todo o processo de escolha.
+3. Comprometa-se a assegurar a nomeação de uma mulher e a trabalhar com outros governos para assegurar sua escolha.
+4. Apoie um processo transparente e baseado no mérito, que possibilite um escrutínio público significativo dos candidatos, incluindo seus compromissos com os direitos humanos, a igualdade de gênero e a participação da juventude.
+
+Nosso governo não deve tratar essa decisão como um assunto reservado às nações mais poderosas. Deve utilizar sua voz diplomática para contribuir para a escolha de uma liderança que reflita tanto os princípios das Nações Unidas quanto as pessoas a quem serve.
+
+Como jovem, vivo as consequências das decisões tomadas pelas lideranças internacionais no passado e que continuam sendo tomadas hoje. Quero ver nosso governo demonstrar que as demandas dos jovens por igualdade e por uma liderança que preste contas são levadas a sério.
+
+Agradeceria muito uma resposta por escrito, esclarecendo se nosso governo assumirá esses compromissos e quais medidas concretas pretende adotar para colocá-los em prática.
+
+A próxima escolha para a Secretaria-Geral representa uma oportunidade de transformar décadas de promessas de igualdade em ações concretas. Peço encarecidamente que ajudem a garantir que essa oportunidade não seja perdida.
+
+Atenciosamente,
+
+[Nome completo]
+[Cidade, País]
+[Universidade/Organização, opcional]
+[Endereço de e-mail, opcional]`,
+
+
+  French: (salutation, country) => `${salutation},
+
+Je vous écris en tant que jeune de ${country} pour demander à notre gouvernement de s’engager publiquement à soutenir une femme comme prochaine Secrétaire générale des Nations Unies.
+
+En plus de 80 ans d’existence des Nations Unies, aucune femme n’a occupé cette fonction. Cette exclusion n’est pas simplement une question symbolique. Elle soulève une question fondamentale : la principale institution internationale du monde est-elle prête à mettre en pratique l’égalité qu’elle promeut ?
+
+Ma génération et le grand public méritent un leadership international courageux, compétent et responsable. Nous avons besoin d’une Secrétaire générale des Nations Unies qui défende les droits humains, œuvre pour la paix, écoute réellement les jeunes et respecte les principes de la Charte des Nations Unies, même lorsque cela implique de remettre en question des intérêts puissants.
+
+Soutenir une femme ne signifie pas mettre de côté les qualifications. Cela signifie reconnaître que l’expérience, l’intégrité, les compétences diplomatiques et les qualités de leadership ne sont pas réservées aux hommes, et refuser d’accepter un nouveau processus de sélection qui laisserait de côté des femmes hautement qualifiées.
+
+Les femmes ont depuis longtemps démontré qu’elles possèdent l’expérience, l’intégrité, les compétences diplomatiques et les qualités de leadership nécessaires pour exercer les plus hautes responsabilités dans les affaires internationales. Il est temps de mettre fin à leur exclusion persistante de cette fonction.
+
+Je demande donc à notre gouvernement de :
+
+1. S’engager publiquement à soutenir une femme comme prochaine Secrétaire générale des Nations Unies.
+2. Encourager notre Représentation permanente auprès des Nations Unies à promouvoir cet engagement dans ses discussions avec les autres États Membres et tout au long du processus de nomination.
+3. S’engager à obtenir la nomination d’une femme et à travailler avec d’autres gouvernements pour assurer sa nomination.
+4. Soutenir un processus transparent et fondé sur le mérite, permettant un véritable examen public des candidatures, notamment de leur engagement en faveur des droits humains, de l’égalité de genre et de la participation des jeunes.
+
+Notre gouvernement ne devrait pas considérer cette décision comme une question réservée aux États les plus puissants. Il devrait utiliser sa voix diplomatique pour contribuer à faire émerger un leadership qui reflète à la fois les principes des Nations Unies et les populations qu’elles servent.
+
+En tant que jeune, je vis avec les conséquences des décisions que les dirigeants internationaux ont prises hier et continuent de prendre aujourd’hui. Je souhaite voir notre gouvernement démontrer que les demandes des jeunes en faveur de l’égalité et d’un leadership responsable sont prises au sérieux.
+
+Je vous serais reconnaissant(e) de bien vouloir me fournir une réponse écrite indiquant si notre gouvernement prendra ces engagements et quelles mesures concrètes il compte adopter pour les faire avancer.
+
+La prochaine nomination représente une occasion de transformer des décennies de promesses en matière d’égalité en actions concrètes. Je vous demande de contribuer à faire en sorte que cette occasion ne soit pas perdue.
+
+Cordialement,
+
+[Nom complet]
+[Ville, Pays]
+[Université/Organisation, facultatif]
+[Adresse e-mail, facultatif]`,
+
+
+  Russian: (salutation, country) => `${salutation},
+
+Я обращаюсь к Вам как представитель молодёжи ${country} с призывом к нашему правительству публично заявить о поддержке продвижения женщины на пост следующего Генерального секретаря Организации Объединённых Наций.
+
+За более чем 80 лет существования ООН ни одна женщина не занимала этот пост. Это не просто вопрос символического представительства. Такая ситуация ставит принципиальный вопрос: готова ли ведущая международная организация мира на практике следовать тем принципам равенства, которые она провозглашает?
+
+Моё поколение и общество в целом заслуживают смелого, компетентного и подотчётного международного руководства. Нам нужен Генеральный секретарь ООН, который будет защищать права человека, добиваться мира, по-настоящему прислушиваться к молодёжи и отстаивать принципы Устава ООН, даже когда это идёт вразрез с интересами влиятельных сил.
+
+Поддержка женщины на этот пост не означает отказа от требований к профессиональной квалификации. Она означает признание того, что опыт, добросовестность, дипломатические навыки и лидерские качества присущи не только мужчинам, и отказ мириться с очередным процессом отбора, оставляющим достойных кандидаток без внимания.
+
+Женщины давно доказали, что обладают опытом, добросовестностью, дипломатическими навыками и лидерскими качествами, необходимыми для работы на самом высоком уровне международных отношений. Пришло время положить конец многолетнему отсутствию женщин на этом посту.
+
+В связи с этим я призываю наше правительство:
+
+1. Публично заявить о поддержке женщины на пост следующего Генерального секретаря ООН.
+2. Поручить нашему Постоянному представителю при ООН продвигать эту позицию в обсуждениях с другими государствами — членами ООН и на всех этапах процесса назначения.
+3. Взять на себя обязательство добиваться назначения женщины на этот пост и сотрудничать с другими правительствами для достижения этой цели.
+4. Поддержать прозрачный процесс отбора на основе профессиональных качеств, обеспечивающий возможность содержательного общественного обсуждения кандидатур, в том числе их приверженности правам человека, гендерному равенству и участию молодёжи.
+
+Наше правительство не должно рассматривать это решение как вопрос, находящийся исключительно в ведении наиболее могущественных государств. Оно должно использовать свой дипломатический голос, чтобы содействовать назначению руководства, которое воплощает принципы Организации Объединённых Наций и представляет интересы людей, которым она служит.
+
+Как представитель молодёжи, я живу с последствиями решений, которые международные лидеры принимали вчера и продолжают принимать сегодня. Я хочу, чтобы наше правительство продемонстрировало серьёзное отношение к требованиям молодых людей о равенстве и подотчётности руководства.
+
+Прошу предоставить письменный ответ с разъяснением того, готово ли наше правительство взять на себя эти обязательства и какие конкретные шаги оно предпримет для их выполнения.
+
+Предстоящее назначение — это возможность воплотить в жизнь обещания равенства, звучавшие на протяжении десятилетий. Призываю Вас содействовать тому, чтобы эта возможность не была упущена.
+
+С уважением,
+
+[Полное имя]
+[Город, страна]
+[Университет / организация — по желанию]
+[Адрес электронной почты — по желанию]`,
+
+
+  Chinese: (salutation, country) => `${salutation}：
+
+我是一名来自${country}的青年，谨致函敦促我国政府公开承诺，支持由一位女性出任下一任联合国秘书长。
+
+联合国成立八十多年来，从未有女性担任这一职务。这种长期将女性排除在外的状况，并非仅仅涉及象征意义，更提出了一个根本性问题：作为世界上最重要的国际机构，联合国是否准备好践行其所倡导的平等原则？
+
+我们这一代以及广大公众，理应拥有勇于担当、能力卓越且切实履行问责责任的国际领导者。我们需要一位捍卫人权、致力于和平、认真倾听青年声音并恪守《联合国宪章》宗旨和原则的秘书长，即使这意味着挑战强大的既得利益。
+
+支持女性出任秘书长，并不意味着放宽任职资格要求，而是要承认，经验、操守、外交能力和领导才能并非男性所独有，并拒绝接受又一次让合格女性被排除在外的遴选过程。
+
+长期以来，女性早已展现出担任国际事务最高层级职务所需的经验、操守、外交能力和领导才能。如今，是时候结束女性长期被排除在这一职位之外的局面了。
+
+因此，我请求我国政府：
+
+1. 公开承诺，支持由一位女性出任下一任联合国秘书长。
+2. 鼓励我国常驻联合国代表在与其他会员国磋商时，以及在整个任命过程中，积极推动落实这一承诺。
+3. 承诺致力于促成一位女性获任秘书长，并与其他国家政府共同努力，确保实现这一目标。
+4. 支持透明、择优的遴选程序，确保公众能够对候选人进行实质性审视，包括审视其在人权、性别平等和青年参与方面的承诺。
+
+我国政府不应将这一决定视为仅由最强大的国家主导的事务，而应积极发挥自身的外交影响力，推动选出既体现联合国原则、又回应其所服务民众期待的领导者。
+
+作为一名青年，我正承受着国际领导人过去所作决定以及当下持续作出的决定所带来的影响。我希望看到我国政府以实际行动表明，青年对于平等和负责任领导的诉求正受到认真对待。
+
+恳请您以书面形式回复，说明我国政府是否愿意作出上述承诺，以及将采取哪些具体措施予以落实。
+
+下一任秘书长的任命，是将数十年来有关平等的承诺转化为行动的契机。我敦促您为此发挥积极作用，确保这一契机不被错失。
+
+此致
+敬礼！
+
+[姓名]
+[城市，国家]
+[大学／组织，可选]
+[电子邮箱，可选]`,
+
+
+  Arabic: (salutation, country) => `${salutation}،
+
+أكتب إليكم بصفتي من شباب ${country}، لأحث حكومتنا على إعلان التزامها علنًا بدعم تولي امرأة منصب الأمين العام المقبل للأمم المتحدة.
+
+منذ تأسيس الأمم المتحدة قبل أكثر من ثمانين عامًا، لم تتولَّ أي امرأة هذا المنصب. ولا يقتصر هذا الإقصاء على الجانب الرمزي، بل يثير تساؤلًا جوهريًا حول مدى استعداد أبرز مؤسسة دولية في العالم لتجسيد مبادئ المساواة التي تدعو إليها.
+
+يستحق جيلنا، وسائر أفراد المجتمع، قيادة دولية تتحلى بالشجاعة والكفاءة وتخضع للمساءلة. نحن بحاجة إلى أمين عام للأمم المتحدة يدافع عن حقوق الإنسان، ويعمل من أجل السلام، ويصغي بجدية إلى الشباب، ويتمسك بمبادئ ميثاق الأمم المتحدة، حتى عندما يتطلب ذلك تحدي مصالح القوى النافذة.
+
+إن دعم تولي امرأة هذا المنصب لا يعني التغاضي عن المؤهلات المطلوبة، بل الاعتراف بأن الخبرة والنزاهة والمهارات الدبلوماسية والقدرة على القيادة ليست حكرًا على الرجال، ورفض تكرار عملية اختيار تُستبعد فيها النساء المؤهلات.
+
+لطالما أثبتت النساء أنهن يتمتعن بالخبرة والنزاهة والمهارات الدبلوماسية والقدرات القيادية اللازمة لتولي أرفع المناصب في الشؤون الدولية. وقد حان الوقت لوضع حد لإقصائهن المستمر عن هذا المنصب.
+
+وعليه، أدعو حكومتنا إلى اتخاذ الخطوات التالية:
+
+1. الإعلان علنًا عن التزامها بدعم تولي امرأة منصب الأمين العام المقبل للأمم المتحدة.
+2. حث ممثلنا الدائم لدى الأمم المتحدة على العمل على تعزيز هذا الالتزام خلال المشاورات مع الدول الأعضاء الأخرى، وطوال عملية الاختيار والتعيين.
+3. الالتزام بضمان تعيين امرأة في هذا المنصب، والتعاون مع الحكومات الأخرى لتحقيق ذلك.
+4. دعم عملية اختيار شفافة تقوم على الكفاءة والجدارة، وتتيح للرأي العام فرصة حقيقية للاطلاع على مؤهلات المرشحين ومواقفهم وتقييمها، بما في ذلك مدى التزامهم بحقوق الإنسان والمساواة بين الجنسين ومشاركة الشباب.
+
+لا ينبغي لحكومتنا أن تتعامل مع هذا القرار باعتباره شأنًا يقتصر على الدول الأكثر نفوذًا، بل عليها أن تستخدم صوتها الدبلوماسي للمساهمة في اختيار قيادة تعكس مبادئ الأمم المتحدة والشعوب التي تخدمها.
+
+بصفتي من جيل الشباب، أعيش اليوم تبعات القرارات التي اتخذها القادة الدوليون في الماضي، وما زالوا يتخذونها اليوم. وأتطلع إلى أن تثبت حكومتنا أنها تأخذ مطالب الشباب بالمساواة والقيادة الخاضعة للمساءلة على محمل الجد.
+
+وأتطلع إلى تلقي رد كتابي منكم يوضح ما إذا كانت حكومتنا ستتعهد باتخاذ هذه الخطوات، وما الإجراءات الملموسة التي ستتخذها للمضي قدمًا في تنفيذها.
+
+يمثل تعيين الأمين العام المقبل فرصة لتحويل عقود من الوعود بالمساواة إلى أفعال ملموسة. وأحثكم على المساهمة في ضمان عدم ضياع هذه الفرصة.
+
+مع خالص الاحترام والتقدير،
+
+[الاسم الكامل]
+[المدينة، البلد]
+[الجامعة أو المنظمة، اختياري]
+[عنوان البريد الإلكتروني، اختياري]`
+
+};
 
 
 /* LOAD GOOGLE SHEET */
@@ -906,45 +1154,37 @@ function showContact(contact) {
 
 
   const salutation =
-    contact["Salutation"] ||
-    "Dear Minister";
+  const language =
+  contact["Letter Language"] ||
+  "English";
+
+const salutation =
+  contact["Localized Salutation"] ||
+  contact["Salutation"] ||
+  "";
+
+const template =
+  letterTemplates[language] ||
+  letterTemplates.English;
 
 const message =
-`${salutation},
+  template(
+    salutation,
+    contact["Country"]
+  );
 
-I am writing as a young person from ${contact["Country"]} to urge our government to publicly commit to supporting a woman as the next Secretary-General of the United Nations.
+  const messageBox =
+  document.getElementById("message");
 
-In the more than 80 years since the United Nations was founded, no woman has held this position. This exclusion is not simply a matter of symbolism. It raises a fundamental question about whether the world’s leading international institution is prepared to practice the equality it promotes.
+messageBox.dir =
+  language === "Arabic"
+    ? "rtl"
+    : "ltr";
 
-My generation and the wider public deserve international leadership that is courageous, capable, and accountable. We need a UN Secretary-General who will defend human rights, work for peace, listen meaningfully to young people, and uphold the principles of the UN Charter, even when doing so challenges powerful interests.
-
-Supporting a woman does not mean setting qualifications aside. It means recognizing that experience, integrity, diplomatic skills and leadership are not limited to men, and refusing to accept another selection process that leaves qualified women behind.
-
-Women have long demonstrated the experience, integrity, diplomatic skills, and leadership needed to serve at the highest levels of international affairs. It is time to end the longstanding exclusion of women from this position.
-
-I therefore ask our government to:
-
-1. Publicly commit to supporting a woman as the next UN Secretary-General.
-2. Encourage our Permanent Representative to the United Nations to advance this commitment in discussions with other Member States and throughout the appointment process.
-3. Commit to secure the appointment of a woman and work with other governments to secure her appointment.
-4. Support a transparent, merit-based process that enables meaningful public scrutiny of candidates, including their commitment to human rights, gender equality and youth participation.
-
-Our government should not treat this decision as a matter reserved for the most powerful states. It should use its diplomatic voice to help secure leadership that reflects both the principles of the United Nations and the people it serves.
-
-As a young person, I am living with the consequences of the decisions international leaders made yesterday and continue to make today. I want to see our government demonstrate that young people’s demands for equality and accountable leadership are taken seriously.
-
-I would highly appreciate a written response explaining whether our government will make these commitments and what concrete steps it will take to advance them.
-
-The next appointment is an opportunity to turn decades of promises of equality into action. I urge you to help ensure that this opportunity is not lost.
-
-Sincerely,
-
-[Full Name]
-[City, Country]
-[University/Organization, optional]
-[Email address, optional]`;
-
-
+messageBox.style.textAlign =
+  language === "Arabic"
+    ? "right"
+    : "left";
 
   document
     .getElementById(
@@ -1116,8 +1356,20 @@ function buildActionButtons(
       function () {
 
 
-        const subject =
-          "Support a Woman as the Next UN Secretary-General";
+const emailSubjects = {
+  English: "Support a Woman as the Next UN Secretary-General",
+  Spanish: "Apoye a una mujer como próxima Secretaria General de las Naciones Unidas",
+  French: "Soutenez une femme comme prochaine Secrétaire générale des Nations Unies",
+  Portuguese: "Apoie uma mulher como próxima Secretária-Geral das Nações Unidas",
+  Russian: "Поддержите женщину на пост следующего Генерального секретаря ООН",
+  Chinese: "支持由女性出任下一任联合国秘书长",
+  Arabic: "دعم تولي امرأة منصب الأمين العام المقبل للأمم المتحدة"
+};
+
+const subject =
+  emailSubjects[
+    contact["Letter Language"] || "English"
+  ] || emailSubjects.English;
 
 
         const body =
