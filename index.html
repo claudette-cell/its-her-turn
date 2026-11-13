@@ -860,13 +860,15 @@ document
           country
         );
 
-
       if (!contact) {
 
         return;
 
       }
 
+      gtag('event', 'country_selected', {
+        country: country
+      });
 
       showContact(contact);
 
@@ -1067,6 +1069,10 @@ function buildActionButtons(
 
       }
 
+      gtag('event', 'copy_message', {
+        country: contact["Country"]
+      });
+
 
       setTimeout(
         () => {
@@ -1134,7 +1140,9 @@ function buildActionButtons(
             body
           );
 
-
+gtag('event', 'email_government', {
+          country: contact["Country"]
+        });
         window.location.href =
           mailto;
 
@@ -1223,7 +1231,14 @@ instructions.innerHTML =
 
     formButton.rel =
       "noopener noreferrer";
-
+    formButton.addEventListener(
+      "click",
+      function () {
+        gtag('event', 'open_contact_form', {
+          country: contact["Country"]
+        });
+      }
+    );
 
     buttonRow.appendChild(
       formButton
