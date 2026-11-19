@@ -1411,7 +1411,19 @@ gtag('event', 'email_government', {
     area.appendChild(
       buttonRow
     );
+const manualEmail =
+  document.createElement("p");
 
+manualEmail.className =
+  "small";
+
+manualEmail.innerHTML =
+  `Prefer to send it manually? Email: 
+  <a href="mailto:${email}">${email}</a>`;
+
+area.appendChild(
+  manualEmail
+);
 
     const note =
       document.createElement(
